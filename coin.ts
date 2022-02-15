@@ -28,7 +28,7 @@ export class CoinTosser {
         return {heads, tails};
     }
     static thumbMaxValueTossSequence(n: number, priority: side){
-        CoinTosser.thumbTossSequence(n, {priority: priority, minSecondary: 1})
+       return CoinTosser.thumbTossSequence(n, {priority: priority, minSecondary: 1})
     }
 
 
