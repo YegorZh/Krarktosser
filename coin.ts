@@ -1,54 +1,50 @@
 interface ThumbParameters {
     priority: side;
+    amountOfTriggers?: number;
     minPriority?: number;
     maxPriority?: number;
     minSecondary?: number;
     maxSecondary?: number;
+    isSpreadEven?: boolean;
 }
+
 export enum side {
     heads, tails
 }
 
 export class CoinTosser {
-    static toss(){
+    static toss() {
         return Math.floor(Math.random() * 2);
     }
-    static usualTossSequence(n: number = 1) {
-        let heads = 0;
-        let tails = 0;
 
-        for (let i = 0; i < n; i++) {
-                if (CoinTosser.toss() === side.heads) {
-                    heads++;
-                } else {
-                    tails++;
-            }
-        }
+    static checkPriority(output: number[], secondary: side, parameters: ThumbParameters) {
+        let out: side | undefined;
+        if (parameters.isSpreadEven && output[parameters.priority] > output[secondary]) out = secondary;
+        if (parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority) if(!(parameters.maxSecondary && output[secondary] >= parameters.maxSecondary)) out = secondary;
+        if (parameters.maxSecondary && output[secondary] >= parameters.maxSecondary) if (!(parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority)) out = parameters.priority;
+        if (parameters.minSecondary && output[secondary] < parameters.minSecondary) out = secondary;
+        if (parameters.minPriority && output[parameters.priority] < parameters.minPriority) out = parameters.priority;
+        if(typeof out === 'undefined') out = parameters.priority;
 
-        return {heads, tails};
-    }
-    static thumbMaxValueTossSequence(n: number, priority: side){
-       return CoinTosser.thumbTossSequence(n, {priority: priority, minSecondary: 1})
+        return out;
     }
 
+    static tossSequence(tossAmount: number = 1, parameters: ThumbParameters = {priority: side.heads}) {
+        let output: number[] = [0, 0];
 
-    static thumbTossSequence(n: number = 1, parameters: ThumbParameters) {
-        let output: number[] = [0,0];
+        let iterations = 1;
+        if (parameters.amountOfTriggers) iterations = parameters.amountOfTriggers + 1;
+
         let currentPriority = parameters.priority;
         let secondary: side;
         parameters.priority === side.heads ? secondary = side.tails : secondary = side.heads;
 
-        for(let i = 0; i < n; i++){
-            if(parameters.minPriority && output[parameters.priority] < parameters.minPriority) currentPriority = parameters.priority;
-            else if(parameters.minSecondary && output[secondary] < parameters.minSecondary) currentPriority = secondary;
-            else if(parameters.maxPriority && output[parameters.priority] < parameters.maxPriority) currentPriority = parameters.priority;
-            else if(parameters.maxSecondary && output[parameters.priority] < parameters.maxSecondary) currentPriority = secondary;
-            else currentPriority = parameters.priority;
-
-            for(let j = 0; j < 2; j++){
+        for (let i = 0; i < tossAmount; i++) {
+            currentPriority = this.checkPriority(output, secondary, parameters);
+            for (let j = 0; j < iterations; j++) {
                 let result = CoinTosser.toss();
-                if(2 - j !== 1 && result !== currentPriority) continue;
-                if(result === side.heads){
+                if (iterations - j !== 1 && result !== currentPriority) continue;
+                if (result === side.heads) {
                     output[side.heads]++;
                     break;
                 } else {
