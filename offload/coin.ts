@@ -53,7 +53,6 @@ export class CoinTosser {
                 }
             }
         }
-
         return output;
     }
 }
