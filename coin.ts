@@ -29,7 +29,7 @@ export class CoinTosser {
         return out;
     }
 
-    static tossSequence(tossAmount: number = 1, parameters: ThumbParameters = {priority: side.heads}) {
+    static async tossSequence(tossAmount: number = 1, parameters: ThumbParameters = {priority: side.heads}) {
         let output: number[] = [0, 0];
 
         let iterations = 1;
@@ -39,8 +39,9 @@ export class CoinTosser {
         let secondary: side;
         parameters.priority === side.heads ? secondary = side.tails : secondary = side.heads;
 
-        for (let i = 0; i < tossAmount; i++) {
-            currentPriority = this.checkPriority(output, secondary, parameters);
+        function recursiveLoop(targetI: number, res: Function, i: number = 0){
+            if(i >= targetI) return res(output);
+            currentPriority = CoinTosser.checkPriority(output, secondary, parameters);
             for (let j = 0; j < iterations; j++) {
                 let result = CoinTosser.toss();
                 if (iterations - j !== 1 && result !== currentPriority) continue;
@@ -52,7 +53,9 @@ export class CoinTosser {
                     break;
                 }
             }
+            setImmediate(recursiveLoop.bind(null, tossAmount, res, ++i));
         }
-        return output;
+
+        return new Promise((res, rej) => recursiveLoop(tossAmount, res));
     }
 }
