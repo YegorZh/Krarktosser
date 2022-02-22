@@ -1,4 +1,4 @@
-interface ThumbParameters {
+export interface ThumbParameters {
     priority: side;
     amountOfTriggers?: number;
     minPriority?: number;
@@ -40,7 +40,10 @@ export class CoinTosser {
         parameters.priority === side.heads ? secondary = side.tails : secondary = side.heads;
 
         function recursiveLoop(targetI: number, res: Function, i: number = 0){
-            if(i >= targetI) return res(output);
+            if(i >= targetI) {
+                let [heads, tails] = output;
+                return res({heads, tails});
+            }
             currentPriority = CoinTosser.checkPriority(output, secondary, parameters);
             for (let j = 0; j < iterations; j++) {
                 let result = CoinTosser.toss();
