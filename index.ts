@@ -11,9 +11,10 @@ app.get('/api/coin', (req, res) => {
         return (typeof query === 'string' && regex.test(query));
     }
 
-    if (!req.query.amount) return res.status(400).send('Bad request, no amount query given.')
-    if (!testQuery(req.query.amount)) return res.status(400).send('Bad request, amount query has invalid value. Use a number.');
-    let n = Number(req.query.amount);
+    let n: number;
+    if(!req.query.amount) n = 1;
+    else if (!testQuery(req.query.amount)) return res.status(400).send('Bad request, amount query has invalid value. Use a number.');
+    else n = Number(req.query.amount);
 
     let prio = 0;
     if(req.query.side){
