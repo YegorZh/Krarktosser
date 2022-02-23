@@ -41,7 +41,7 @@ app.get('/api/coin', (req, res) => {
 })
 
 app.all('*', (req, res) => {
-    res.send('Error 404. Resource not found.');
+    res.send('Error 404. Resource not found.\n Use /api/coin to toss coins.');
 })
 
 app.listen(port, () => {
