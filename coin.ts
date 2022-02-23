@@ -1,6 +1,6 @@
 export interface ThumbParameters {
     priority: side;
-    amountOfTriggers?: number;
+    amountOfThumbs?: number;
     minPriority?: number;
     maxPriority?: number;
     minSecondary?: number;
@@ -20,10 +20,10 @@ export class CoinTosser {
     static checkPriority(output: number[], secondary: side, parameters: ThumbParameters) {
         let out: side | undefined;
         if (parameters.isSpreadEven && output[parameters.priority] > output[secondary]) out = secondary;
+        if (parameters.minSecondary && output[secondary] < parameters.minSecondary) if(!(parameters.minPriority && output[secondary] >= parameters.minPriority)) out = secondary;
+        if (parameters.minPriority && output[parameters.priority] < parameters.minPriority) if(!(parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority)) out = parameters.priority;
         if (parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority) if(!(parameters.maxSecondary && output[secondary] >= parameters.maxSecondary)) out = secondary;
         if (parameters.maxSecondary && output[secondary] >= parameters.maxSecondary) if (!(parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority)) out = parameters.priority;
-        if (parameters.minSecondary && output[secondary] < parameters.minSecondary) out = secondary;
-        if (parameters.minPriority && output[parameters.priority] < parameters.minPriority) out = parameters.priority;
         if(typeof out === 'undefined') out = parameters.priority;
 
         return out;
@@ -33,7 +33,7 @@ export class CoinTosser {
         let output: number[] = [0, 0];
 
         let iterations = 1;
-        if (parameters.amountOfTriggers) iterations = parameters.amountOfTriggers + 1;
+        if (parameters.amountOfThumbs) iterations = Math.pow(2, parameters.amountOfThumbs);
 
         let currentPriority = parameters.priority;
         let secondary: side;
@@ -42,7 +42,8 @@ export class CoinTosser {
         function recursiveLoop(targetI: number, res: Function, i: number = 0){
             if(i >= targetI) {
                 let [heads, tails] = output;
-                return res({heads, tails});
+                const totalFlips = tossAmount * iterations;
+                return res({heads, tails, totalFlips});
             }
             currentPriority = CoinTosser.checkPriority(output, secondary, parameters);
             for (let j = 0; j < iterations; j++) {
