@@ -25,7 +25,7 @@ app.get('/about', (req, res) =>{
         '<p><b>maxSecondary</b> - maximum value for secondary side. Once achieved maximizes prio or goes for even spread. Number >= 0.</p>' +
         '<p><b>evenSpread</b> - Whether to start spreading heads|tails values or maximize prio side. Bool.</p>' +
         '<p>All params besides amount are optional and will be equal to 0 || false in case they are omitted.</p>' +
-        '<p><a href="/">Home</a> <a href="/api/coin">API</a></p>>')
+        '<p><a href="/">Home</a> <a href="/api/coin">API</a></p>')
 });
 
 app.all('*', (req, res) => {
