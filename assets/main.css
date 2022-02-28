@@ -1,0 +1,152 @@
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+input, select {
+  border: 2px solid lightgrey;
+}
+
+input:focus, select:focus {
+  border: 2px solid darkgrey;
+}
+
+header {
+  background-color: lightgrey;
+  width: 100vw;
+  font-size: 4vh;
+  overflow: auto;
+}
+
+header ul {
+  float: right;
+}
+
+header li {
+  margin-right: 0.2em;
+  display: inline;
+}
+
+.flip-types {
+  margin-top: 8vh;
+  font-size: 5vh;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.flip-types li {
+  text-align: center;
+}
+
+.total-flips {
+  margin-top: 5vh;
+  font-size: 4vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.total-flips li {
+  display: inline;
+}
+
+.button-toss {
+  margin-top: 8vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.button-toss button {
+  background-color: lightgrey;
+  border: none;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  padding: 2vh 14vw;
+  text-align: center;
+  display: inline-block;
+  font-size: 3vh;
+}
+
+.button-toss button:hover {
+  background-color: grey;
+}
+
+.button-toss button:active {
+  -webkit-transform: translateY(0.15vh);
+          transform: translateY(0.15vh);
+}
+
+.settings {
+  margin-top: 5vh;
+  font-size: 3vh;
+}
+
+.settings input, .settings select {
+  height: 3vh;
+  width: 40vw;
+  font-size: 3vh;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.settings select {
+  display: block;
+  background: none;
+  line-height: 3vh;
+}
+
+.settings .section ul {
+  margin-left: 5vw;
+  display: inline-block;
+}
+
+.button-settings {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: lightgrey;
+  width: 100vw;
+}
+
+.button-settings button {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: black;
+  padding-top: 0.2em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+}
+
+.button-settings svg {
+  display: inline-block;
+  width: 6vh;
+  height: 6vh;
+}
+/*# sourceMappingURL=main.css.map */

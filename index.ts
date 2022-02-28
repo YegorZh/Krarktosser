@@ -9,11 +9,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
-
-app.get('/', (req, res, next) => {
-    res.send('<p>Welcome to the home page.</p>' +
-        '<p>Visit <a href="/about">about<a/> page to get some info on how the api works or go straight to the <a href="/api/coin">api page</a>.</p>');
-});
+app.use(express.static('./assets'))
 
 app.get('/about', (req, res, next) =>{
     res.send('<h1>How does this api work?</h1>'
