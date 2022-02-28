@@ -3,7 +3,13 @@ import {CoinTosser, side, ThumbParameters} from "../coin";
 const express = require('express');
 export const router: Router = express.Router();
 
-router.get('/coin', (req, res) =>{
+router.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://krarktosser.herokuapp.com"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+router.get('/coin', (req, res, next) =>{
     const regex = new RegExp('^\\d+$');
     function testQuery(query: any) {
         return (typeof query === 'string' && regex.test(query));

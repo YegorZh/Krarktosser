@@ -4,13 +4,18 @@ const apiRouter = require('./router/api').router;
 const app: Express = express();
 
 app.use('/api', apiRouter);
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://krarktosser.herokuapp.com"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
     res.send('<p>Welcome to the home page.</p>' +
         '<p>Visit <a href="/about">about<a/> page to get some info on how the api works or go straight to the <a href="/api/coin">api page</a>.</p>');
 });
 
-app.get('/about', (req, res) =>{
+app.get('/about', (req, res, next) =>{
     res.send('<h1>How does this api work?</h1>'
     +'<p>The main purpose of this api is to toss coins and give you results. But it\'s made to work with complex toss patterns that card Krark\'s Thumb from Magic: ' +
         ' The Gathering creates.</p>' +
@@ -28,7 +33,7 @@ app.get('/about', (req, res) =>{
         '<p><a href="/">Home</a> <a href="/api/coin">API</a></p>')
 });
 
-app.all('*', (req, res) => {
+app.all('*', (req, res, next) => {
     res.send('<p>Error 404. Resource not found. Go to the <a href="/">home page.</a></p>');
 });
 
