@@ -41,7 +41,7 @@ header li {
 }
 
 .flip-types {
-  margin-top: 8vh;
+  margin-top: 5vh;
   font-size: 5vh;
   width: 100vw;
   display: -webkit-box;
@@ -126,7 +126,7 @@ header li {
   position: relative;
   bottom: 0;
   left: 0;
-  margin-top: 6vh;
+  margin-top: 2vh;
   background-color: lightgrey;
   width: 100vw;
 }
