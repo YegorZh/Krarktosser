@@ -1,3 +1,4 @@
+
 body {
     padding: 0;
     margin: 0;
@@ -26,10 +27,8 @@ header {
     background-color: lightgrey;
     width: 100vw;
     font-size: 4vh;
-    overflow: auto;
-    ul {
-        float: right;
-    }
+    display: flex;
+    justify-content: right;
     li {
         margin-right: 0.2em;
         display: inline;
@@ -77,8 +76,10 @@ header {
         display: inline-block;
         font-size: 3vh; 
 
-        &:hover{background-color:grey;}
-        &:active{transform: translateY(0.15vh);}
+        &:active {
+            transform: translateY(0.15vh);
+            background-color:grey;
+        }
     }
 }
 
@@ -106,9 +107,10 @@ header {
 }
 
 .button-settings {
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
+    margin-top: 6vh;
     background-color: lightgrey;
     width: 100vw;
     
