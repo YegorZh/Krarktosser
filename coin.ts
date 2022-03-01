@@ -1,5 +1,5 @@
 export interface ThumbParameters {
-    priority: side;
+    priority?: side;
     amountOfThumbs?: number;
     minPriority?: number;
     maxPriority?: number;
@@ -19,17 +19,34 @@ export class CoinTosser {
 
     static checkPriority(output: number[], secondary: side, parameters: ThumbParameters) {
         let out: side | undefined;
-        if (parameters.isSpreadEven && output[parameters.priority] > output[secondary]) out = secondary;
-        if (parameters.minSecondary && output[secondary] < parameters.minSecondary) if(!(parameters.minPriority && output[secondary] >= parameters.minPriority)) out = secondary;
-        if (parameters.minPriority && output[parameters.priority] < parameters.minPriority) if(!(parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority)) out = parameters.priority;
-        if (parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority) if(!(parameters.maxSecondary && output[secondary] >= parameters.maxSecondary)) out = secondary;
-        if (parameters.maxSecondary && output[secondary] >= parameters.maxSecondary) if (!(parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority)) out = parameters.priority;
-        if(typeof out === 'undefined') out = parameters.priority;
+        
+        if(parameters.isSpreadEven && output[side.heads] > output[side.tails]) out = side.tails;
+        else if(parameters.isSpreadEven && output[side.heads] < output[side.tails]) out = side.heads;
+
+        if (typeof parameters.priority !== 'undefined') {
+            let maxSecCheck = Boolean(parameters.maxSecondary && output[secondary] >= parameters.maxSecondary);
+            let maxPrioCheck = Boolean(parameters.maxPriority && output[parameters.priority] >= parameters.maxPriority);
+            let minSecCheck = Boolean(parameters.minSecondary && output[secondary] < parameters.minSecondary);
+            let minPrioCheck = Boolean(parameters.minPriority && output[parameters.priority] < parameters.minPriority);
+
+            if(minSecCheck && !(parameters.maxSecondary || maxSecCheck)) out = secondary;
+            if(minPrioCheck && !(parameters.maxPriority || maxPrioCheck)) out = parameters.priority;
+            
+            if(!(maxSecCheck && maxPrioCheck)){
+                if(maxPrioCheck) out = secondary;
+                if(maxSecCheck) out = parameters.priority;
+            }
+
+            if(typeof out === 'undefined') out = parameters.priority;   
+        }
+
+        console.log(parameters.priority)
+        console.log(out)
 
         return out;
     }
 
-    static async tossSequence(tossAmount: number = 1, parameters: ThumbParameters = {priority: side.heads}) {
+    static async tossSequence(tossAmount: number = 1, parameters: ThumbParameters = {}) {
         let output: number[] = [0, 0];
 
         let iterations = 1;
