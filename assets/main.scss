@@ -1,0 +1,132 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+input, select {
+    border: 2px solid lightgrey;
+    &:focus {
+        border: 2px solid darkgrey;
+    }
+}
+
+header {
+    background-color: lightgrey;
+    width: 100vw;
+    font-size: 4vh;
+    overflow: auto;
+    ul {
+        float: right;
+    }
+    li {
+        margin-right: 0.2em;
+        display: inline;
+    }
+}
+
+// .hero {
+//     height: 100vh;
+// }
+
+.flip-types {
+    margin-top: 8vh;
+    font-size: 5vh;
+
+    width: 100vw;
+    display: flex;
+    justify-content: space-evenly;
+    
+    li{
+        text-align: center;
+    }
+}
+
+.total-flips {
+    margin-top: 5vh;
+    font-size: 4vh;
+    display: flex;
+    justify-content: center;
+    li {
+        display: inline;
+    }
+}
+
+.button-toss {
+    margin-top: 8vh;
+    display: flex;
+    justify-content: center;
+    button {
+        background-color: lightgrey;
+        border: none;
+        color: black;
+        font-family: 'Montserrat', sans-serif;
+        padding: 2vh 14vw;
+        text-align: center;
+        display: inline-block;
+        font-size: 3vh; 
+
+        &:hover{background-color:grey;}
+        &:active{transform: translateY(0.15vh);}
+    }
+}
+
+.settings {
+    margin-top: 5vh;
+    font-size: 3vh;
+    input, select {
+        height: 3vh;
+        width: 40vw;
+        font-size: 3vh;
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+    }
+    select {
+        display: block;
+        background: none;
+        line-height: 3vh;
+    }
+    .section {
+        ul{
+            margin-left: 5vw;
+            display: inline-block;
+        }
+    }
+}
+
+.button-settings {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: lightgrey;
+    width: 100vw;
+    
+    button {
+        display: inline-block;
+        background: none;
+        border: none;
+        color: black;
+        padding-top: 0.2em;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 1em; 
+    }
+
+    svg {
+        display: inline-block;
+        width: 6vh;
+        height: 6vh;
+    }
+}
