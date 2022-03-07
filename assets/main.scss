@@ -4,7 +4,9 @@ body {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
 }
-
+a{
+    font-family: 'Montserrat', sans-serif;
+}
 ul {
     margin: 0;
     padding: 0;
@@ -25,6 +27,7 @@ input, select {
 
 header {
     background-color: lightgrey;
+    
     width: 100vw;
     font-size: 4vh;
     display: flex;
@@ -32,6 +35,14 @@ header {
     li {
         margin-right: 0.2em;
         display: inline;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        &:hover {
+            font-weight: bold;
+        }
     }
 }
 
@@ -76,6 +87,9 @@ header {
         display: inline-block;
         font-size: 3vh; 
 
+        &:hover {
+            font-weight: bold;
+        }
         &:active {
             transform: translateY(0.15vh);
             background-color:grey;
@@ -111,7 +125,7 @@ header {
     background-color: lightgrey;
     width: 100vw;
     
-    button {
+    .settings-button {
         border: none;
         background: none;
         padding-top: 0.2em;
@@ -121,6 +135,26 @@ header {
         
         &:active {
             transform: translateY(0.15vh);
+        }
+    }
+
+    .button-reset {
+        background: none;
+        border: none;
+        border-left: 1px solid darkgrey;
+        border-right: 1px solid darkgrey;
+        font-size: 2vh;
+        vertical-align: top;
+        font-size: 3vh;
+        padding: 0 3vw;
+        height: 7vh;
+
+        &:hover {
+            font-weight: bold;
+        }
+        &:active {
+            transform: translateY(0.15vh);
+            background-color: darkgrey;
         }
     }
 

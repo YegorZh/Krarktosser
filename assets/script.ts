@@ -2,13 +2,15 @@ const tossButton = document.getElementById('tossButton');
 const settingsButton = document.getElementById('settingsButton');
 const settingsMenu = document.getElementsByClassName('hide');
 const settingsDiv = document.getElementById('settingsDiv');
+const firstSettings = document.getElementById('firstSettings');
 
-function toggleSettings(settingsMenu: HTMLCollectionOf<Element>, settingsDiv: HTMLElement){
+function toggleSettings(){
     for(let i = 0; i < settingsMenu.length; i++){
         let element = settingsMenu[i] as HTMLBaseElement;
         if(element.style.display === 'none') {
             element.style.display = 'inline-block';
             if(settingsDiv) {
+                if(firstSettings) firstSettings.style.marginLeft = '5vw';
                 settingsDiv.style.display = 'block';
                 settingsDiv.style.justifyContent = 'none';
             }
@@ -16,17 +18,18 @@ function toggleSettings(settingsMenu: HTMLCollectionOf<Element>, settingsDiv: HT
         else {
             element.style.display = 'none';
             if(settingsDiv) {
+                if(firstSettings) firstSettings.style.marginLeft = '0';
                 settingsDiv.style.display = 'flex';
                 settingsDiv.style.justifyContent = 'center';
             }
         }
     }
 }
-toggleSettings(settingsMenu, settingsDiv as HTMLElement);
+toggleSettings();
 
 
 settingsButton?.addEventListener('click', () => {
-    toggleSettings(settingsMenu, settingsDiv as HTMLElement);
+    toggleSettings();
 });
 
 tossButton?.addEventListener('click', () => {

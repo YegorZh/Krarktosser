@@ -2,12 +2,15 @@ var tossButton = document.getElementById('tossButton');
 var settingsButton = document.getElementById('settingsButton');
 var settingsMenu = document.getElementsByClassName('hide');
 var settingsDiv = document.getElementById('settingsDiv');
-function toggleSettings(settingsMenu, settingsDiv) {
+var firstSettings = document.getElementById('firstSettings');
+function toggleSettings() {
     for (var i = 0; i < settingsMenu.length; i++) {
         var element = settingsMenu[i];
         if (element.style.display === 'none') {
             element.style.display = 'inline-block';
             if (settingsDiv) {
+                if (firstSettings)
+                    firstSettings.style.marginLeft = '5vw';
                 settingsDiv.style.display = 'block';
                 settingsDiv.style.justifyContent = 'none';
             }
@@ -15,15 +18,17 @@ function toggleSettings(settingsMenu, settingsDiv) {
         else {
             element.style.display = 'none';
             if (settingsDiv) {
+                if (firstSettings)
+                    firstSettings.style.marginLeft = '0';
                 settingsDiv.style.display = 'flex';
                 settingsDiv.style.justifyContent = 'center';
             }
         }
     }
 }
-toggleSettings(settingsMenu, settingsDiv);
+toggleSettings();
 settingsButton === null || settingsButton === void 0 ? void 0 : settingsButton.addEventListener('click', function () {
-    toggleSettings(settingsMenu, settingsDiv);
+    toggleSettings();
 });
 tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListener('click', function () {
     var result = {
