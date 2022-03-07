@@ -59,8 +59,6 @@ tossButton?.addEventListener('click', () => {
         if(settings[key].value) request += key+'='+settings[key].value+'&';
     }
 
-    console.log(request);
-
     fetch(request).then((response) => {
         for(let key in result) {
             if(result[key]) result[key].innerHTML = '-';
