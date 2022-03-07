@@ -56,7 +56,7 @@ tossButton?.addEventListener('click', () => {
         if(settings[key].value) request += key+'='+settings[key].value+'&';
     }
 
-    fetch('http://krarktosser.herokuapp.com/api/coin' + request).then((response) => {
+    fetch('https://krarktosser.herokuapp.com/api/coin' + request).then((response) => {
         for(let key in result) {
             if(result[key]) result[key].innerHTML = '-';
         }   

@@ -52,7 +52,7 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         if (settings[key].value)
             request += key + '=' + settings[key].value + '&';
     }
-    fetch('http://krarktosser.herokuapp.com/api/coin' + request).then(function (response) {
+    fetch('https://krarktosser.herokuapp.com/api/coin' + request).then(function (response) {
         for (var key in result) {
             if (result[key])
                 result[key].innerHTML = '-';
