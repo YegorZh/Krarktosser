@@ -123,28 +123,27 @@ header li {
 }
 
 .button-settings {
-  position: relative;
-  bottom: 0;
-  left: 0;
   margin-top: 2vh;
   background-color: lightgrey;
   width: 100vw;
 }
 
 .button-settings button {
-  display: inline-block;
-  background: none;
   border: none;
-  color: black;
+  background: none;
   padding-top: 0.2em;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 1em;
 }
 
+.button-settings button:active {
+  -webkit-transform: translateY(0.15vh);
+          transform: translateY(0.15vh);
+}
+
 .button-settings svg {
-  display: inline-block;
+  pointer-events: none;
   width: 6vh;
   height: 6vh;
 }
