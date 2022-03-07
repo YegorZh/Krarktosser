@@ -51,12 +51,17 @@ tossButton?.addEventListener('click', () => {
         maxSecond: document.getElementById('maxSecond') as HTMLInputElement
     }
 
-    let request = '?';
+    let request = '';
+    if(document.URL === 'http://127.0.0.1:5500/assets/index.html') request = 'https://krarktosser.herokuapp.com/api/coin?';
+    else request = '/api/coin?';
+
     for(let key in settings) {
         if(settings[key].value) request += key+'='+settings[key].value+'&';
     }
 
-    fetch('https://krarktosser.herokuapp.com/api/coin' + request).then((response) => {
+    console.log(request);
+
+    fetch(request).then((response) => {
         for(let key in result) {
             if(result[key]) result[key].innerHTML = '-';
         }   

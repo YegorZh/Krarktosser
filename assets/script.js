@@ -47,12 +47,17 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         minSecond: document.getElementById('minSecond'),
         maxSecond: document.getElementById('maxSecond')
     };
-    var request = '?';
+    var request = '';
+    if (document.URL === 'http://127.0.0.1:5500/assets/index.html')
+        request = 'https://krarktosser.herokuapp.com/api/coin?';
+    else
+        request = '/api/coin?';
     for (var key in settings) {
         if (settings[key].value)
             request += key + '=' + settings[key].value + '&';
     }
-    fetch('https://krarktosser.herokuapp.com/api/coin' + request).then(function (response) {
+    console.log(request);
+    fetch(request).then(function (response) {
         for (var key in result) {
             if (result[key])
                 result[key].innerHTML = '-';
