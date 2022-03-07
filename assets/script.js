@@ -1,5 +1,6 @@
 var tossButton = document.getElementById('tossButton');
 var settingsButton = document.getElementById('settingsButton');
+var resetButton = document.getElementById('resetButton');
 var settingsMenu = document.getElementsByClassName('hide');
 var settingsDiv = document.getElementById('settingsDiv');
 var firstSettings = document.getElementById('firstSettings');
@@ -65,4 +66,20 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         if (result.totalResult)
             result.totalResult.innerHTML = data.totalFlips;
     });
+});
+resetButton === null || resetButton === void 0 ? void 0 : resetButton.addEventListener('click', function () {
+    var settings = {
+        amount: document.getElementById('amount'),
+        krarkAmount: document.getElementById('thumb'),
+        side: document.getElementById('prio'),
+        evenSpread: document.getElementById('even'),
+        minPrio: document.getElementById('minPrio'),
+        maxPrio: document.getElementById('maxPrio'),
+        minSecond: document.getElementById('minSecond'),
+        maxSecond: document.getElementById('maxSecond')
+    };
+    for (var key in settings) {
+        if (settings[key].value)
+            settings[key].value = '';
+    }
 });

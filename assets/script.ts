@@ -1,5 +1,6 @@
 const tossButton = document.getElementById('tossButton');
 const settingsButton = document.getElementById('settingsButton');
+const resetButton = document.getElementById('resetButton');
 const settingsMenu = document.getElementsByClassName('hide');
 const settingsDiv = document.getElementById('settingsDiv');
 const firstSettings = document.getElementById('firstSettings');
@@ -65,3 +66,20 @@ tossButton?.addEventListener('click', () => {
         if(result.tailsResult) result.tailsResult.innerHTML = data.tails;
         if(result.totalResult) result.totalResult.innerHTML = data.totalFlips;
     })}); 
+
+resetButton?.addEventListener('click', () => {
+    const settings: {[key: string]: any} = {
+        amount: document.getElementById('amount') as HTMLInputElement,
+        krarkAmount: document.getElementById('thumb') as HTMLInputElement,
+        side: document.getElementById('prio') as HTMLInputElement,
+        evenSpread: document.getElementById('even') as HTMLInputElement,
+        minPrio: document.getElementById('minPrio') as HTMLInputElement,
+        maxPrio: document.getElementById('maxPrio') as HTMLInputElement,
+        minSecond: document.getElementById('minSecond') as HTMLInputElement,
+        maxSecond: document.getElementById('maxSecond') as HTMLInputElement
+    };
+
+    for(let key in settings) {
+        if(settings[key].value) settings[key].value = '';
+    }
+})
