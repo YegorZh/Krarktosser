@@ -39,10 +39,6 @@ export class CoinTosser {
 
             if(typeof out === 'undefined') out = parameters.priority;   
         }
-
-        console.log(parameters.priority)
-        console.log(out)
-
         return out;
     }
 
@@ -65,7 +61,7 @@ export class CoinTosser {
             currentPriority = CoinTosser.checkPriority(output, secondary, parameters);
             for (let j = 0; j < iterations; j++) {
                 let result = CoinTosser.toss();
-                if (iterations - j !== 1 && result !== currentPriority) continue;
+                if (currentPriority !== undefined && iterations - j !== 1 && result !== currentPriority) continue;
                 if (result === side.heads) {
                     output[side.heads]++;
                     break;
