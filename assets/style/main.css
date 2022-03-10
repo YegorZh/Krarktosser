@@ -117,13 +117,13 @@ header a:hover {
 
 .settings {
   margin-top: 4vh;
-  font-size: 3vh;
+  font-size: 2.75vh;
 }
 
 .settings input, .settings select {
   height: 3vh;
   width: 40vw;
-  font-size: 3vh;
+  font-size: 2.75vh;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
@@ -135,6 +135,7 @@ header a:hover {
 }
 
 .settings .section ul {
+  margin-bottom: 0.5vh;
   margin-left: 5vw;
   display: inline-block;
 }
