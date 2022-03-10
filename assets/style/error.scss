@@ -1,0 +1,51 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+a{
+    font-family: 'Montserrat', sans-serif;
+}
+h1{ 
+    margin: 0;
+    font-size: 9vh;
+}
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    font-size: 4vh;
+}
+
+input, select {
+    border: 2px solid lightgrey;
+    &:focus {
+        border: 2px solid darkgrey;
+    }
+}
+
+header {
+    background-color: lightgrey;
+    
+    width: 100vw;
+    font-size: 4vh;
+    display: flex;
+    justify-content: right;
+    li {
+        margin-right: 0.2em;
+        display: inline;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+        &:hover {
+            font-weight: bold;
+        }
+    }
+}

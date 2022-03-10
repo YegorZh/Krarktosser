@@ -1,5 +1,6 @@
 const express = require('express');
 import {Express} from 'express';
+import * as path from 'path';
 const apiRouter = require('./router/api').router;
 const app: Express = express();
 
@@ -31,10 +32,10 @@ app.get('/about', (req, res, next) =>{
 });
 
 app.all('*', (req, res, next) => {
-    res.send('<p>Error 404. Resource not found. Go to the <a href="/">home page.</a></p>');
+    res.sendFile(path.join(__dirname, 'assets/error.html'));
 });
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
-    console.log('Listening on port 8000');
+    console.log('Listening on port ' + port);
 });
