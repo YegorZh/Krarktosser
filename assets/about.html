@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krarktosser - error</title>
+    <title>Krarktosser - About</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
@@ -14,33 +14,48 @@
 
 <body>
     <div>
-        <header>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </header>
-    </div>
-    <div>
-        <h1>How does this api work?</h1>
-        <p>The main purpose of this api is to toss coins and give you results. But it\'s made to work with complex toss
-            patterns that card Krark\s Thumb from Magic:
-            The Gathering creates.</p>
-        <h2>Query parameters:</h2>
-        <p><b>amount</b> - dictates how many coins to throw. If you just want to throw some coins that\s the only
-            parameter you need. Number >= 0</p>
-        <p><b>krarkAmount</b> - how many "Krark\s Thumb" you have in play. Each of them dictates exponentially how many
-            coins to throw and interacts with params listed lower. Number >= 0.</p>
-        <p>All of the parameters listed below only take effect if krarkAmount is bigger than 0.</p>
-        <p><b>side</b> - which side to prioritize with "Krark\s Thumb". Heads or tails.</p>
-        <p><b>minPrio</b> - minimum value to try and achieve for prioritized side. Number >= 0.</p>
-        <p><b>maxPrio</b> - maximum value for prioritized side. Once achieved tries to maximize secondary side. Number
-            >= 0.</p>
-        <p><b>minSecondary</b> - minimum value to try and achieve for secondary side. Number >= 0.</p>
-        <p><b>maxSecondary</b> - maximum value for secondary side. Once achieved maximizes prio or goes for even spread.
-            Number >= 0.</p>
-        <p><b>evenSpread</b> - Whether to start spreading heads|tails values or maximize prio side. Bool.</p>
-        <p>All params besides amount are optional and will be equal to 0 || false in case they are omitted.</p>
-    </div>
+        <div>
+            <header>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </header>
+            <div>
+                <h1>What's this site about?</h1>
+                <div>
+                    <p>The main feature of this site is coin tossing without hussle. You specify the amount and get
+                        results,
+                        without waiting or tedious animations.</p>
+                    <p>But if you activate advanced settings you can manipulate your results, simulating how card
+                        Krark's Thumb from Magic: The Gathering works.</p>
+                    <img src="./img/mrd-190-krark-s-thumb.jpg" alt="Krak's Thumb card">
+                </div>
+                <div>
+                    <h2>Settings:</h2>
+                    <p><b>Amount:</b> how many coins to throw.</p>
+                    <p><i>Settings listed below are advanced and hidden by default. Clicking on the gear in the bottom
+                            left corner makes them visible.</i></p>
+                    <hr>
+                    <p><b>Krark's Thumb:</b> how many cards named "Krark's Thumb" you have in play.</p>
+                    <p><i>All of the parameters listed below only take effect if you have at least one "Krark's Thumb"
+                            in play.</i></p>
+                    <hr>
+                    <p><b>Priority:</b> which side to prioritize. Heads or tails.</p>
+                    <p><b>Even spread:</b> if true tries to even out results.</p>
+                    <p><i>Following parameters won't allow for even spread until given thresholds are achieved.</i></p>
+                    <hr>
+                    <p><b>Min priority:</b> minimum value to try and achieve for prioritized side.</p>
+                    <p><b>Max priority:</b> maximum value for prioritized side. Once achieved tries to maximize
+                        secondary side.</p>
+                    <p><i>Min parameters take priority over max ones.</i></p>
+                    <hr>
+                    <p><b>Min secondary:</b> minimum value to try and achieve for secondary side.</p>
+                    <p><b>Max secondary:</b> maximum value for secondary side. Once achieved tries to maximizes
+                        prioritized side.</p>
+                </div>
+            </div>
+        </div>
 </body>
+
 </html>

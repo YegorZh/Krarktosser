@@ -1,3 +1,12 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  font-size: 18px;
+  word-wrap: break-word;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -10,7 +19,16 @@ a {
 
 h1 {
   margin: 0;
-  font-size: 9vh;
+  padding: 0;
+  padding-left: 2vw;
+  padding-top: 2vh;
+}
+
+h2 {
+  margin: 0;
+  padding: 0;
+  padding-left: 2vw;
+  padding-top: 2vh;
 }
 
 ul {
@@ -22,15 +40,19 @@ ul {
 p {
   margin: 0;
   padding: 0;
-  font-size: 4vh;
+  padding-left: 2vw;
+  padding-top: 1vh;
 }
 
-input, select {
-  border: 2px solid lightgrey;
-}
-
-input:focus, select:focus {
-  border: 2px solid darkgrey;
+img {
+  max-width: 300px;
+  width: 75vw;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
 }
 
 header {
