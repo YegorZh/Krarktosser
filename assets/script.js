@@ -16,15 +16,17 @@ var settings = {
     minSecond: document.getElementById('minSecond'),
     maxSecond: document.getElementById('maxSecond')
 };
+var defaultMax = 1000000;
+var defaultMin = 0;
 var peaksSettings = {
-    amount: { min: 0, max: 1000000 },
-    krarkAmount: { min: 0, max: 10 },
+    amount: { min: defaultMin, max: defaultMax },
+    krarkAmount: { min: defaultMin, max: 10 },
     side: { values: ['heads', 'tails'] },
     evenSpread: { values: ['true', 'false'] },
-    minPrio: { min: 0, max: 1000000 },
-    maxPrio: { min: 0, max: 1000000 },
-    minSecond: { min: 0, max: 1000000 },
-    maxSecond: { min: 0, max: 1000000 }
+    minPrio: { min: defaultMin, max: defaultMax },
+    maxPrio: { min: defaultMin, max: defaultMax },
+    minSecond: { min: defaultMin, max: defaultMax },
+    maxSecond: { min: defaultMin, max: defaultMax }
 };
 function removeLimiters(str) {
     var out = str;
@@ -98,14 +100,14 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         totalResult: document.getElementById('total')
     };
     var validate = {
-        amount: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
-        krarkAmount: function (param) { return Number(param) >= 0 && Number(param) <= 10; },
+        amount: function (param) { return Number(param) >= defaultMin && Number(param) <= defaultMax; },
+        krarkAmount: function (param) { return Number(param) >= defaultMin && Number(param) <= 10; },
         side: function (param) { return param.toLowerCase() === 'heads' || param.toLowerCase() === 'tails' || param === ''; },
         evenSpread: function (param) { return param.toLowerCase() === 'true' || param.toLocaleLowerCase() === 'false' || param === ''; },
-        minPrio: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
-        maxPrio: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
-        minSecond: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
-        maxSecond: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; }
+        minPrio: function (param) { return Number(param) >= defaultMin && Number(param) <= defaultMax; },
+        maxPrio: function (param) { return Number(param) >= defaultMin && Number(param) <= defaultMax; },
+        minSecond: function (param) { return Number(param) >= defaultMin && Number(param) <= defaultMax; },
+        maxSecond: function (param) { return Number(param) >= defaultMin && Number(param) <= defaultMax; }
     };
     var errorMessage = {
         amount: 'Error. Amount must be no less than 0 and no more than 1000000.',

@@ -6,6 +6,7 @@ const settingsDiv = document.getElementById('settingsDiv');
 const firstSettings = document.getElementById('firstSettings');
 const spinners = document.getElementsByClassName('lds-circle');
 let isRequesting = false;
+
 const settings: { [key: string]: any } = {
     amount: document.getElementById('amount') as HTMLInputElement,
     krarkAmount: document.getElementById('thumb') as HTMLInputElement,
@@ -16,15 +17,17 @@ const settings: { [key: string]: any } = {
     minSecond: document.getElementById('minSecond') as HTMLInputElement,
     maxSecond: document.getElementById('maxSecond') as HTMLInputElement
 }
+const defaultMax = 1000000;
+const defaultMin = 0;
 const peaksSettings: { [key: string]: {min?: number, max?: number, values?: string[]}} = {
-    amount: {min: 0, max: 1000000},
-    krarkAmount: {min: 0, max: 10},
+    amount: {min: defaultMin, max: defaultMax},
+    krarkAmount: {min: defaultMin, max: 10},
     side: {values: ['heads', 'tails']},
     evenSpread: {values: ['true', 'false']},
-    minPrio: {min: 0, max: 1000000},
-    maxPrio: {min: 0, max: 1000000},
-    minSecond: {min: 0, max: 1000000},
-    maxSecond: {min: 0, max: 1000000},
+    minPrio: {min: defaultMin, max: defaultMax},
+    maxPrio: {min: defaultMin, max: defaultMax},
+    minSecond: {min: defaultMin, max: defaultMax},
+    maxSecond: {min: defaultMin, max: defaultMax},
 }
 
 function removeLimiters(str: string){
@@ -95,15 +98,16 @@ tossButton?.addEventListener('click', () => {
         totalResult: document.getElementById('total')
     }
 
+    
     const validate: { [key: string]: Function } = {
-        amount: (param: string) => Number(param) >= 0 && Number(param) <= 1000000,
-        krarkAmount: (param: string) => Number(param) >= 0 && Number(param) <= 10,
+        amount: (param: string) => Number(param) >= defaultMin && Number(param) <= defaultMax,
+        krarkAmount: (param: string) => Number(param) >= defaultMin && Number(param) <= 10,
         side: (param: string) => param.toLowerCase() === 'heads' || param.toLowerCase() === 'tails' || param === '',
         evenSpread: (param: string) => param.toLowerCase() === 'true' || param.toLocaleLowerCase() === 'false' || param === '',
-        minPrio: (param: string) => Number(param) >= 0 && Number(param) <= 1000000,
-        maxPrio: (param: string) => Number(param) >= 0 && Number(param) <= 1000000,
-        minSecond: (param: string) => Number(param) >= 0 && Number(param) <= 1000000,
-        maxSecond: (param: string) => Number(param) >= 0 && Number(param) <= 1000000
+        minPrio: (param: string) => Number(param) >= defaultMin && Number(param) <= defaultMax,
+        maxPrio: (param: string) => Number(param) >= defaultMin && Number(param) <= defaultMax,
+        minSecond: (param: string) => Number(param) >= defaultMin && Number(param) <= defaultMax,
+        maxSecond: (param: string) => Number(param) >= defaultMin && Number(param) <= defaultMax
     };
 
     const errorMessage: { [key: string]: string } = {

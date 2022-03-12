@@ -2,7 +2,7 @@ import {Router} from "express";
 import {CoinTosser, side, ThumbParameters} from "../coin";
 const express = require('express');
 export const router: Router = express.Router();
-
+let interactions = 0;
 router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -10,6 +10,7 @@ router.use(function(req, res, next) {
   });
 
 router.get('/coin', (req, res, next) =>{
+    console.log(++interactions);
     const regex = new RegExp('^\\d+$');
     function testQuery(query: any) {
         return (typeof query === 'string' && regex.test(query));
