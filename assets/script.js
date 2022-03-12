@@ -4,6 +4,16 @@ var resetButton = document.getElementById('resetButton');
 var settingsMenu = document.getElementsByClassName('hide');
 var settingsDiv = document.getElementById('settingsDiv');
 var firstSettings = document.getElementById('firstSettings');
+var settings = {
+    amount: document.getElementById('amount'),
+    krarkAmount: document.getElementById('thumb'),
+    side: document.getElementById('prio'),
+    evenSpread: document.getElementById('even'),
+    minPrio: document.getElementById('minPrio'),
+    maxPrio: document.getElementById('maxPrio'),
+    minSecond: document.getElementById('minSecond'),
+    maxSecond: document.getElementById('maxSecond')
+};
 function toggleSettings() {
     for (var i = 0; i < settingsMenu.length; i++) {
         var element = settingsMenu[i];
@@ -28,6 +38,32 @@ function toggleSettings() {
     }
 }
 toggleSettings();
+var peaksSettings = {
+    amount: { min: 0, max: 1000000 },
+    krarkAmount: { min: 0, max: 10 },
+    minPrio: { min: 0, max: 1000000 },
+    maxPrio: { min: 0, max: 1000000 },
+    minSecond: { min: 0, max: 1000000 },
+    maxSecond: { min: 0, max: 1000000 }
+};
+var _loop_1 = function (key) {
+    if (key === 'side' || key === 'evenSpread')
+        return "continue";
+    if (settings[key]) {
+        settings[key].oninput = function () {
+            settings[key].value = settings[key].value.replace(new RegExp(/-+|\.+|,+/), '');
+            settings[key].value = settings[key].value.replace(new RegExp(/^0{2,}/), '0');
+            if (Number(settings[key].value) < peaksSettings[key].min)
+                settings[key].value = settings[key].value * -1;
+            if (Number(settings[key].value) > peaksSettings[key].max)
+                settings[key].value = peaksSettings[key].max;
+        };
+    }
+};
+for (var key in settings) {
+    _loop_1(key);
+}
+;
 settingsButton === null || settingsButton === void 0 ? void 0 : settingsButton.addEventListener('click', function () {
     toggleSettings();
 });
@@ -36,16 +72,6 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         headsResult: document.getElementById('heads'),
         tailsResult: document.getElementById('tails'),
         totalResult: document.getElementById('total')
-    };
-    var settings = {
-        amount: document.getElementById('amount'),
-        krarkAmount: document.getElementById('thumb'),
-        side: document.getElementById('prio'),
-        evenSpread: document.getElementById('even'),
-        minPrio: document.getElementById('minPrio'),
-        maxPrio: document.getElementById('maxPrio'),
-        minSecond: document.getElementById('minSecond'),
-        maxSecond: document.getElementById('maxSecond')
     };
     var validate = {
         amount: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
@@ -57,6 +83,16 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         minSecond: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
         maxSecond: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; }
     };
+    var errorMessage = {
+        amount: 'Error. Amount must be no less than 0 and no more than 1000000.',
+        krarkAmount: 'Error. Krark\'s Thumb must be no less than 0 and no more than 10.',
+        side: 'Error. Side must either be Heads or Tails.',
+        evenSpread: 'Error. Even spread must either be True or False.',
+        minPrio: 'Error. Min priority must be no less than 0 and no more than 1000000.',
+        maxPrio: 'Error. Max priority must be no less than 0 and no more than 1000000.',
+        minSecond: 'Error. Min secondary must be no less than 0 and no more than 1000000.',
+        maxSecond: 'Error. Max secondary must be no less than 0 and no more than 1000000.'
+    };
     var request = '';
     if (document.URL === 'http://127.0.0.1:5500/assets/')
         request = 'https://krarktosser.herokuapp.com/api/coin?';
@@ -66,7 +102,7 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         if (settings[key]) {
             console.log(settings[key].value);
             if (!(validate[key](settings[key].value))) {
-                return alert('Error, invalid data');
+                return alert(errorMessage[key]);
             }
             request += key + '=' + settings[key].value + '&';
         }
