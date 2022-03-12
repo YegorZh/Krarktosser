@@ -51,10 +51,6 @@ header {
     }
 }
 
-// .hero {
-//     height: 100vh;
-// }
-
 .flip-types {
     margin-top: 4vh;
     font-size: 5vh;
@@ -174,11 +170,29 @@ header {
     }
 
     svg {
+        margin-bottom: 0;
         pointer-events: none;
         width: 6vh;
         height: 6vh;
     }
 }
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    margin-top: auto;
+    .inside {
+        margin-top: 2vh;
+        background-color: lightgrey;
+        height: 4vh;
+    }
+}
+
+
 
 .lds-circle {
     display: inline-block;

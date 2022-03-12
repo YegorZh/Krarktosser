@@ -75,9 +75,17 @@ header {
         }
     }
 }
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
 .footer {
-    background-color: lightgrey;
-    height: 4vh;
-    margin-top: 3vh;
+    margin-top: auto;
+    .inside {
+        margin-top: 2vh;
+        background-color: lightgrey;
+        height: 4vh;
+    }
 }

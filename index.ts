@@ -13,8 +13,8 @@ app.use(function(req, res, next) {
   
 app.use(express.static('./assets'))
 
-app.get('/about', (req, res, next) =>{
-    res.sendFile(path.join(__dirname, 'assets/about.html'));
+app.get('/guide', (req, res, next) =>{
+    res.sendFile(path.join(__dirname, 'assets/guide.html'));
 });
 
 app.all('*', (req, res, next) => {
