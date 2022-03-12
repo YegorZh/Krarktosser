@@ -79,3 +79,4 @@ fabric.properties
 test.ts
 test.js
 node_modules/
+.vscode

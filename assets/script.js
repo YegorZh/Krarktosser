@@ -47,16 +47,30 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         minSecond: document.getElementById('minSecond'),
         maxSecond: document.getElementById('maxSecond')
     };
+    var validate = {
+        amount: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
+        krarkAmount: function (param) { return Number(param) >= 0 && Number(param) <= 10; },
+        side: function (param) { return param.toLowerCase() === 'heads' || param.toLowerCase() === 'tails' || param === ''; },
+        evenSpread: function (param) { return param.toLowerCase() === 'true' || param.toLocaleLowerCase() === 'false' || param === ''; },
+        minPrio: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
+        maxPrio: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
+        minSecond: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; },
+        maxSecond: function (param) { return Number(param) >= 0 && Number(param) <= 1000000; }
+    };
     var request = '';
-    if (document.URL === 'http://127.0.0.1:5500/assets/index.html')
+    if (document.URL === 'http://127.0.0.1:5500/assets/')
         request = 'https://krarktosser.herokuapp.com/api/coin?';
     else
         request = '/api/coin?';
     for (var key in settings) {
-        if (settings[key].value)
+        if (settings[key]) {
+            console.log(settings[key].value);
+            if (!(validate[key](settings[key].value))) {
+                return alert('Error, invalid data');
+            }
             request += key + '=' + settings[key].value + '&';
+        }
     }
-    console.log(request);
     fetch(request).then(function (response) {
         for (var key in result) {
             if (result[key])
