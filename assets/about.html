@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krarktosser - About</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style/error.css">
+</head>
+
+<body>
+    <div>
+        <div>
+            <header>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </header>
+            <div>
+                <h1>What's this site about?</h1>
+                <div>
+                    <p>The main feature of this site is coin tossing without hussle. You specify the amount and get
+                        results,
+                        without waiting or tedious animations.</p>
+                    <p>But if you activate advanced settings you can manipulate your results, simulating how card
+                        Krark's Thumb from Magic: The Gathering works.</p>
+                    <img src="./img/mrd-190-krark-s-thumb.jpg" alt="Krak's Thumb card">
+                </div>
+                <div>
+                    <h2>Settings:</h2>
+                    <p><b>Amount:</b> how many coins to throw.</p>
+                    <p><i>Settings listed below are advanced and hidden by default. Clicking on the gear in the bottom
+                            left corner makes them visible.</i></p>
+                    <hr>
+                    <p><b>Krark's Thumb:</b> how many cards named "Krark's Thumb" you have in play.</p>
+                    <p><i>All of the parameters listed below only take effect if you have at least one "Krark's Thumb"
+                            in play.</i></p>
+                    <hr>
+                    <p><b>Priority:</b> which side to prioritize. Heads or tails.</p>
+                    <p><b>Even spread:</b> if true tries to even out results.</p>
+                    <p><i>Following parameters won't allow for even spread until given thresholds are achieved.</i></p>
+                    <hr>
+                    <p><b>Min priority:</b> minimum value to try and achieve for prioritized side.</p>
+                    <p><b>Max priority:</b> maximum value for prioritized side. Once achieved tries to maximize
+                        secondary side.</p>
+                    <p><i>Min parameters take priority over max ones.</i></p>
+                    <hr>
+                    <p><b>Min secondary:</b> minimum value to try and achieve for secondary side.</p>
+                    <p><b>Max secondary:</b> maximum value for secondary side. Once achieved tries to maximizes
+                        prioritized side.</p>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

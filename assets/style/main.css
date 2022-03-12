@@ -19,11 +19,13 @@ p {
   padding: 0;
 }
 
-input, select {
+input,
+select {
   border: 2px solid lightgrey;
 }
 
-input:focus, select:focus {
+input:focus,
+select:focus {
   border: 2px solid darkgrey;
 }
 
@@ -117,13 +119,14 @@ header a:hover {
 
 .settings {
   margin-top: 4vh;
-  font-size: 3vh;
+  font-size: 2.75vh;
 }
 
-.settings input, .settings select {
+.settings input,
+.settings select {
   height: 3vh;
   width: 40vw;
-  font-size: 3vh;
+  font-size: 2.75vh;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
@@ -135,6 +138,7 @@ header a:hover {
 }
 
 .settings .section ul {
+  margin-bottom: 0.5vh;
   margin-left: 5vw;
   display: inline-block;
 }
