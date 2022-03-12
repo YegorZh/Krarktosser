@@ -78,7 +78,7 @@ for (const key in settings) {
     } else if (settings[key]) {
         settings[key].oninput = () => {
             settings[key].value = settings[key].value.replace(new RegExp(/-+|\.+|,+/), '');
-            settings[key].value = settings[key].value.replace(new RegExp(/^0{2,}/), '0');
+            settings[key].value = settings[key].value.replace(new RegExp(/^0([0-9]+)/), '0');
             if (peaksSettings[key].min && Number(settings[key].value) < Number(peaksSettings[key].min)) settings[key].value = settings[key].value * -1;
             if (peaksSettings[key].max && Number(settings[key].value) > Number(peaksSettings[key].max)) settings[key].value = peaksSettings[key].max;
         }
