@@ -62,6 +62,16 @@ tossButton?.addEventListener('click', () => {
         maxSecond: (param: string) => Number(param) >= 0 && Number(param) <= 1000000
     };
 
+    const errorMessage: {[key: string]: string} = {
+        amount: 'Error. Amount ',
+        krarkAmount: 'Error.  ',
+        side: '',
+        evenSpread: '',
+        minPrio: '',
+        maxPrio: '',
+        minSecond: '',
+        maxSecond: ''
+    }
     let request = '';
     if (document.URL === 'http://127.0.0.1:5500/assets/') request = 'https://krarktosser.herokuapp.com/api/coin?';
     else request = '/api/coin?';
