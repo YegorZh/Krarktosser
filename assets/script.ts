@@ -4,7 +4,8 @@ const resetButton = document.getElementById('resetButton');
 const settingsMenu = document.getElementsByClassName('hide');
 const settingsDiv = document.getElementById('settingsDiv');
 const firstSettings = document.getElementById('firstSettings');
-
+const spinners = document.getElementsByClassName('lds-circle');
+let isRequesting = false;
 const settings: { [key: string]: any } = {
     amount: document.getElementById('amount') as HTMLInputElement,
     krarkAmount: document.getElementById('thumb') as HTMLInputElement,
@@ -15,6 +16,16 @@ const settings: { [key: string]: any } = {
     minSecond: document.getElementById('minSecond') as HTMLInputElement,
     maxSecond: document.getElementById('maxSecond') as HTMLInputElement
 }
+const peaksSettings: { [key: string]: {min?: number, max?: number, values?: string[]}} = {
+    amount: {min: 0, max: 1000000},
+    krarkAmount: {min: 0, max: 10},
+    side: {values: ['heads', 'tails']},
+    evenSpread: {values: ['true', 'false']},
+    minPrio: {min: 0, max: 1000000},
+    maxPrio: {min: 0, max: 1000000},
+    minSecond: {min: 0, max: 1000000},
+    maxSecond: {min: 0, max: 1000000},
+}
 
 function removeLimiters(str: string){
     let out = str;
@@ -22,7 +33,6 @@ function removeLimiters(str: string){
     out = out.replace(new RegExp('/.*$'),'');
     return out;
 }
-
 function toggleSettings() {
     for (let i = 0; i < settingsMenu.length; i++) {
         let element = settingsMenu[i] as HTMLBaseElement;
@@ -46,17 +56,6 @@ function toggleSettings() {
 }
 
 toggleSettings();
-
-const peaksSettings: { [key: string]: {min?: number, max?: number, values?: string[]}} = {
-    amount: {min: 0, max: 1000000},
-    krarkAmount: {min: 0, max: 10},
-    side: {values: ['heads', 'tails']},
-    evenSpread: {values: ['true', 'false']},
-    minPrio: {min: 0, max: 1000000},
-    maxPrio: {min: 0, max: 1000000},
-    minSecond: {min: 0, max: 1000000},
-    maxSecond: {min: 0, max: 1000000},
-};
 
 for (const key in settings) {
     if (key === 'side' || key === 'evenSpread') {
@@ -90,6 +89,8 @@ settingsButton?.addEventListener('click', () => {
 });
 
 tossButton?.addEventListener('click', () => {
+    if(isRequesting) return;
+
     const result: { [key: string]: any } = {
         headsResult: document.getElementById('heads'),
         tailsResult: document.getElementById('tails'),
@@ -132,12 +133,14 @@ tossButton?.addEventListener('click', () => {
         }
     }
 
+    for (let key in result) {
+        if (result[key]) result[key].innerHTML = '<div class="lds-circle"><div></div></div>';
+    }
+    isRequesting = true;
     fetch(request).then((response) => {
-        for (let key in result) {
-            if (result[key]) result[key].innerHTML = '-';
-        }
         return response.json();
     }).then(data => {
+        isRequesting = false;
         if (result.headsResult) result.headsResult.innerHTML = data.heads;
         if (result.tailsResult) result.tailsResult.innerHTML = data.tails;
         if (result.totalResult) result.totalResult.innerHTML = data.totalFlips;

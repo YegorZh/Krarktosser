@@ -4,6 +4,8 @@ var resetButton = document.getElementById('resetButton');
 var settingsMenu = document.getElementsByClassName('hide');
 var settingsDiv = document.getElementById('settingsDiv');
 var firstSettings = document.getElementById('firstSettings');
+var spinners = document.getElementsByClassName('lds-circle');
+var isRequesting = false;
 var settings = {
     amount: document.getElementById('amount'),
     krarkAmount: document.getElementById('thumb'),
@@ -13,6 +15,16 @@ var settings = {
     maxPrio: document.getElementById('maxPrio'),
     minSecond: document.getElementById('minSecond'),
     maxSecond: document.getElementById('maxSecond')
+};
+var peaksSettings = {
+    amount: { min: 0, max: 1000000 },
+    krarkAmount: { min: 0, max: 10 },
+    side: { values: ['heads', 'tails'] },
+    evenSpread: { values: ['true', 'false'] },
+    minPrio: { min: 0, max: 1000000 },
+    maxPrio: { min: 0, max: 1000000 },
+    minSecond: { min: 0, max: 1000000 },
+    maxSecond: { min: 0, max: 1000000 }
 };
 function removeLimiters(str) {
     var out = str;
@@ -44,16 +56,6 @@ function toggleSettings() {
     }
 }
 toggleSettings();
-var peaksSettings = {
-    amount: { min: 0, max: 1000000 },
-    krarkAmount: { min: 0, max: 10 },
-    side: { values: ['heads', 'tails'] },
-    evenSpread: { values: ['true', 'false'] },
-    minPrio: { min: 0, max: 1000000 },
-    maxPrio: { min: 0, max: 1000000 },
-    minSecond: { min: 0, max: 1000000 },
-    maxSecond: { min: 0, max: 1000000 }
-};
 var _loop_1 = function (key) {
     if (key === 'side' || key === 'evenSpread') {
         settings[key].oninput = function () {
@@ -89,6 +91,8 @@ settingsButton === null || settingsButton === void 0 ? void 0 : settingsButton.a
     toggleSettings();
 });
 tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListener('click', function () {
+    if (isRequesting)
+        return;
     var result = {
         headsResult: document.getElementById('heads'),
         tailsResult: document.getElementById('tails'),
@@ -128,13 +132,15 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
             request += key + '=' + settings[key].value.toLowerCase() + '&';
         }
     }
+    for (var key in result) {
+        if (result[key])
+            result[key].innerHTML = '<div class="lds-circle"><div></div></div>';
+    }
+    isRequesting = true;
     fetch(request).then(function (response) {
-        for (var key in result) {
-            if (result[key])
-                result[key].innerHTML = '-';
-        }
         return response.json();
     }).then(function (data) {
+        isRequesting = false;
         if (result.headsResult)
             result.headsResult.innerHTML = data.heads;
         if (result.tailsResult)
