@@ -65,7 +65,6 @@ var _loop_1 = function (key) {
                 for (var i = 1; i < arr.length; i++) {
                     reg = new RegExp(removeLimiters(reg.toString()) + '|^' + arr[i] + '$');
                 }
-                console.log(reg);
                 var match = settings[key].value.toLowerCase().match(reg);
                 if (!match || match.length === -1)
                     settings[key].value = '';
@@ -125,7 +124,6 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
         request = '/api/coin?';
     for (var key in settings) {
         if (settings[key]) {
-            console.log(settings[key].value);
             if (!(validate[key](settings[key].value))) {
                 return alert(errorMessage[key]);
             }

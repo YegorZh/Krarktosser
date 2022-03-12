@@ -80,4 +80,10 @@ header a {
 header a:hover {
   font-weight: bold;
 }
+
+.footer {
+  background-color: lightgrey;
+  height: 4vh;
+  margin-top: 3vh;
+}
 /*# sourceMappingURL=error.css.map */

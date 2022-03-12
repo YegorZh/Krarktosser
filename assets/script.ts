@@ -68,8 +68,6 @@ for (const key in settings) {
                     reg = new RegExp(removeLimiters(reg.toString()) + '|^' + arr[i] + '$');
                 }
 
-                console.log(reg);
-
                 const match = settings[key].value.toLowerCase().match(reg);
                 if(!match || match.length === -1) settings[key].value = '';
             }
@@ -125,7 +123,6 @@ tossButton?.addEventListener('click', () => {
 
     for (let key in settings) {
         if (settings[key]) {
-            console.log(settings[key].value);
             if (!(validate[key](settings[key].value))) {
                 return alert(errorMessage[key]);
             }
