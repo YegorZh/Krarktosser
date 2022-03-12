@@ -19,7 +19,7 @@ router.get('/coin', (req, res, next) =>{
     if(!req.query.amount) n = 1;
     else if (!testQuery(req.query.amount)) return res.status(400).send('Bad request, amount query has invalid value. Use a number.');
     else n = Number(req.query.amount);
-
+    
     let params: ThumbParameters = {};
     if(req.query.side){
         if (req.query.side === 'heads' || req.query.side === 'head' || req.query.side === 'h' || req.query.side === '0') params.priority = side.heads;

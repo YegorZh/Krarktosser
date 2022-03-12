@@ -14,6 +14,12 @@ var settings = {
     minSecond: document.getElementById('minSecond'),
     maxSecond: document.getElementById('maxSecond')
 };
+function removeLimiters(str) {
+    var out = str;
+    out = out.replace(new RegExp('^\/'), '');
+    out = out.replace(new RegExp('/.*$'), '');
+    return out;
+}
 function toggleSettings() {
     for (var i = 0; i < settingsMenu.length; i++) {
         var element = settingsMenu[i];
@@ -41,21 +47,36 @@ toggleSettings();
 var peaksSettings = {
     amount: { min: 0, max: 1000000 },
     krarkAmount: { min: 0, max: 10 },
+    side: { values: ['heads', 'tails'] },
+    evenSpread: { values: ['true', 'false'] },
     minPrio: { min: 0, max: 1000000 },
     maxPrio: { min: 0, max: 1000000 },
     minSecond: { min: 0, max: 1000000 },
     maxSecond: { min: 0, max: 1000000 }
 };
 var _loop_1 = function (key) {
-    if (key === 'side' || key === 'evenSpread')
-        return "continue";
-    if (settings[key]) {
+    if (key === 'side' || key === 'evenSpread') {
+        settings[key].oninput = function () {
+            if (peaksSettings[key].values) {
+                var arr = peaksSettings[key].values;
+                var reg = new RegExp('^' + arr[0] + '$');
+                for (var i = 1; i < arr.length; i++) {
+                    reg = new RegExp(removeLimiters(reg.toString()) + '|^' + arr[i] + '$');
+                }
+                console.log(reg);
+                var match = settings[key].value.toLowerCase().match(reg);
+                if (!match || match.length === -1)
+                    settings[key].value = '';
+            }
+        };
+    }
+    else if (settings[key]) {
         settings[key].oninput = function () {
             settings[key].value = settings[key].value.replace(new RegExp(/-+|\.+|,+/), '');
             settings[key].value = settings[key].value.replace(new RegExp(/^0{2,}/), '0');
-            if (Number(settings[key].value) < peaksSettings[key].min)
+            if (peaksSettings[key].min && Number(settings[key].value) < Number(peaksSettings[key].min))
                 settings[key].value = settings[key].value * -1;
-            if (Number(settings[key].value) > peaksSettings[key].max)
+            if (peaksSettings[key].max && Number(settings[key].value) > Number(peaksSettings[key].max))
                 settings[key].value = peaksSettings[key].max;
         };
     }
@@ -104,7 +125,7 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
             if (!(validate[key](settings[key].value))) {
                 return alert(errorMessage[key]);
             }
-            request += key + '=' + settings[key].value + '&';
+            request += key + '=' + settings[key].value.toLowerCase() + '&';
         }
     }
     fetch(request).then(function (response) {
