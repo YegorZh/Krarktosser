@@ -4,7 +4,7 @@ var resetButton = document.getElementById('resetButton');
 var settingsMenu = document.getElementsByClassName('hide');
 var settingsDiv = document.getElementById('settingsDiv');
 var firstSettings = document.getElementById('firstSettings');
-var spinners = document.getElementsByClassName('lds-circle');
+var inputDataLists = document.getElementsByClassName('input-data-list');
 var isRequesting = false;
 var settings = {
     amount: document.getElementById('amount'),
@@ -87,7 +87,15 @@ var _loop_1 = function (key) {
 for (var key in settings) {
     _loop_1(key);
 }
-;
+var _loop_2 = function (i) {
+    var input = inputDataLists[i];
+    input === null || input === void 0 ? void 0 : input.addEventListener('mousedown', function () {
+        input.value = '';
+    });
+};
+for (var i = 0; i < inputDataLists.length; i++) {
+    _loop_2(i);
+}
 settingsButton === null || settingsButton === void 0 ? void 0 : settingsButton.addEventListener('click', function () {
     toggleSettings();
 });

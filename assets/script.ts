@@ -4,7 +4,7 @@ const resetButton = document.getElementById('resetButton');
 const settingsMenu = document.getElementsByClassName('hide');
 const settingsDiv = document.getElementById('settingsDiv');
 const firstSettings = document.getElementById('firstSettings');
-const spinners = document.getElementsByClassName('lds-circle');
+const inputDataLists = document.getElementsByClassName('input-data-list');
 let isRequesting = false;
 
 const settings: { [key: string]: any } = {
@@ -19,21 +19,21 @@ const settings: { [key: string]: any } = {
 }
 const defaultMax = 1000000;
 const defaultMin = 0;
-const peaksSettings: { [key: string]: {min?: number, max?: number, values?: string[]}} = {
-    amount: {min: defaultMin, max: defaultMax},
-    krarkAmount: {min: defaultMin, max: 10},
-    side: {values: ['heads', 'tails']},
-    evenSpread: {values: ['true', 'false']},
-    minPrio: {min: defaultMin, max: defaultMax},
-    maxPrio: {min: defaultMin, max: defaultMax},
-    minSecond: {min: defaultMin, max: defaultMax},
-    maxSecond: {min: defaultMin, max: defaultMax},
+const peaksSettings: { [key: string]: { min?: number, max?: number, values?: string[] } } = {
+    amount: { min: defaultMin, max: defaultMax },
+    krarkAmount: { min: defaultMin, max: 10 },
+    side: { values: ['heads', 'tails'] },
+    evenSpread: { values: ['true', 'false'] },
+    minPrio: { min: defaultMin, max: defaultMax },
+    maxPrio: { min: defaultMin, max: defaultMax },
+    minSecond: { min: defaultMin, max: defaultMax },
+    maxSecond: { min: defaultMin, max: defaultMax },
 }
 
-function removeLimiters(str: string){
+function removeLimiters(str: string) {
     let out = str;
-    out = out.replace(new RegExp('^\/'),'');
-    out = out.replace(new RegExp('/.*$'),'');
+    out = out.replace(new RegExp('^\/'), '');
+    out = out.replace(new RegExp('/.*$'), '');
     return out;
 }
 function toggleSettings() {
@@ -58,12 +58,13 @@ function toggleSettings() {
     }
 }
 
+
 toggleSettings();
 
 for (const key in settings) {
     if (key === 'side' || key === 'evenSpread') {
         settings[key].oninput = () => {
-            if(peaksSettings[key].values){
+            if (peaksSettings[key].values) {
                 const arr = (peaksSettings[key].values as string[]);
 
                 let reg = new RegExp('^' + arr[0] + '$');
@@ -72,7 +73,7 @@ for (const key in settings) {
                 }
 
                 const match = settings[key].value.toLowerCase().match(reg);
-                if(!match || match.length === -1) settings[key].value = '';
+                if (!match || match.length === -1) settings[key].value = '';
             }
         }
     } else if (settings[key]) {
@@ -83,14 +84,22 @@ for (const key in settings) {
             if (peaksSettings[key].max && Number(settings[key].value) > Number(peaksSettings[key].max)) settings[key].value = peaksSettings[key].max;
         }
     }
-};
+}
+
+for (let i = 0; i < inputDataLists.length; i++) {
+    const input = inputDataLists[i] as HTMLInputElement;
+    input?.addEventListener('mousedown', () => {
+        input.value = '';   
+    });
+}
+
 
 settingsButton?.addEventListener('click', () => {
     toggleSettings();
 });
 
 tossButton?.addEventListener('click', () => {
-    if(isRequesting) return;
+    if (isRequesting) return;
 
     const result: { [key: string]: any } = {
         headsResult: document.getElementById('heads'),
@@ -98,7 +107,7 @@ tossButton?.addEventListener('click', () => {
         totalResult: document.getElementById('total')
     }
 
-    
+
     const validate: { [key: string]: Function } = {
         amount: (param: string) => Number(param) >= defaultMin && Number(param) <= defaultMax,
         krarkAmount: (param: string) => Number(param) >= defaultMin && Number(param) <= 10,

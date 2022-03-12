@@ -144,7 +144,23 @@ header {
 
         &:active {
             transform: translateY(0.15vh);
+
+            &:hover{
+                svg {
+                    fill: white;
+                }
+            }
+            svg {
+                fill: white;
+            }
         }
+
+        &:hover{
+            svg {
+                fill: grey;
+            }
+        }
+
     }
 
     .button-reset {

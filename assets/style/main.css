@@ -163,6 +163,18 @@ header a:hover {
           transform: translateY(0.15vh);
 }
 
+.button-settings .settings-button:active:hover svg {
+  fill: white;
+}
+
+.button-settings .settings-button:active svg {
+  fill: white;
+}
+
+.button-settings .settings-button:hover svg {
+  fill: grey;
+}
+
 .button-settings .button-reset {
   background: none;
   border: none;
