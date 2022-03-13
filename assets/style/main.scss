@@ -22,12 +22,12 @@ p {
 input,
 select {
     border: 2px solid lightgrey;
-    ::placeholder {
-        overflow: visible;
-    }
     &:focus {
         border: 2px solid darkgrey;
     }
+}
+input::placeholder {
+    overflow: visible;
 }
 
 header {

@@ -24,29 +24,25 @@ select {
   border: 2px solid lightgrey;
 }
 
-input ::-webkit-input-placeholder,
-select ::-webkit-input-placeholder {
-  overflow: visible;
-}
-
-input :-ms-input-placeholder,
-select :-ms-input-placeholder {
-  overflow: visible;
-}
-
-input ::-ms-input-placeholder,
-select ::-ms-input-placeholder {
-  overflow: visible;
-}
-
-input ::placeholder,
-select ::placeholder {
-  overflow: visible;
-}
-
 input:focus,
 select:focus {
   border: 2px solid darkgrey;
+}
+
+input::-webkit-input-placeholder {
+  overflow: visible;
+}
+
+input:-ms-input-placeholder {
+  overflow: visible;
+}
+
+input::-ms-input-placeholder {
+  overflow: visible;
+}
+
+input::placeholder {
+  overflow: visible;
 }
 
 header {
