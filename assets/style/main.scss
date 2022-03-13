@@ -23,7 +23,7 @@ input,
 select {
     border: 2px solid lightgrey;
     ::placeholder {
-        overflow: visible
+        overflow: visible;
     }
     &:focus {
         border: 2px solid darkgrey;
