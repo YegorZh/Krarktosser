@@ -136,6 +136,7 @@ header a:hover {
 
 .settings select {
   background: none;
+  font-size: 2.4vh;
 }
 
 .settings .section ul {
