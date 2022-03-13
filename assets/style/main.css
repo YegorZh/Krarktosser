@@ -124,16 +124,18 @@ header a:hover {
 
 .settings input,
 .settings select {
-  height: 3vh;
+  height: 3.4vh;
   width: 40vw;
   font-size: 2.75vh;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
 .settings select {
-  width: 41vw;
-  height: 4vh;
+  background: none;
 }
 
 .settings .section ul {
