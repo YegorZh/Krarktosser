@@ -59,7 +59,7 @@ function toggleSettings() {
 }
 toggleSettings();
 var _loop_1 = function (key) {
-    if (key === 'side' || key === 'evenSpread') {
+    if (settings[key] && (key === 'side' || key === 'evenSpread')) {
         settings[key].oninput = function () {
             if (peaksSettings[key].values) {
                 var arr = peaksSettings[key].values;
@@ -158,6 +158,7 @@ tossButton === null || tossButton === void 0 ? void 0 : tossButton.addEventListe
     });
 });
 resetButton === null || resetButton === void 0 ? void 0 : resetButton.addEventListener('click', function () {
+    var _a;
     var settings = {
         amount: document.getElementById('amount'),
         krarkAmount: document.getElementById('thumb'),
@@ -169,7 +170,7 @@ resetButton === null || resetButton === void 0 ? void 0 : resetButton.addEventLi
         maxSecond: document.getElementById('maxSecond')
     };
     for (var key in settings) {
-        if (settings[key].value)
+        if ((_a = settings[key]) === null || _a === void 0 ? void 0 : _a.value)
             settings[key].value = '';
     }
 });

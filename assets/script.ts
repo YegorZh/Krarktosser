@@ -62,7 +62,7 @@ function toggleSettings() {
 toggleSettings();
 
 for (const key in settings) {
-    if (key === 'side' || key === 'evenSpread') {
+    if (settings[key] && (key === 'side' || key === 'evenSpread')) {
         settings[key].oninput = () => {
             if (peaksSettings[key].values) {
                 const arr = (peaksSettings[key].values as string[]);
@@ -170,6 +170,6 @@ resetButton?.addEventListener('click', () => {
     };
 
     for (let key in settings) {
-        if (settings[key].value) settings[key].value = '';
+        if (settings[key]?.value) settings[key].value = '';
     }
 })

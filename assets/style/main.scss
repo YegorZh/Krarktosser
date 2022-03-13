@@ -113,11 +113,10 @@ header {
         text-align: center;
         font-family: 'Montserrat', sans-serif;
     }
-
+    
     select {
-        display: block;
-        background: none;
-        line-height: 3vh;
+        width: 41vw;
+        height: 4vh;
     }
 
     .section {
@@ -145,17 +144,18 @@ header {
         &:active {
             transform: translateY(0.15vh);
 
-            &:hover{
+            &:hover {
                 svg {
                     fill: white;
                 }
             }
+
             svg {
                 fill: white;
             }
         }
 
-        &:hover{
+        &:hover {
             svg {
                 fill: grey;
             }
@@ -201,6 +201,7 @@ header {
 
 .footer {
     margin-top: auto;
+
     .inside {
         margin-top: 2vh;
         background-color: lightgrey;
@@ -208,13 +209,12 @@ header {
     }
 }
 
-
-
 .lds-circle {
     display: inline-block;
     transform: translateZ(1px);
-  }
-  .lds-circle > div {
+}
+
+.lds-circle>div {
     display: inline-block;
     width: 3.5vh;
     height: 3.5vh;
@@ -222,19 +222,25 @@ header {
     border-radius: 50%;
     background: lightgrey;
     animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-  }
-  @keyframes lds-circle {
-    0%, 100% {
-      animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
-    }
-    0% {
-      transform: rotateY(0deg);
-    }
-    50% {
-      transform: rotateY(1800deg);
-      animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
-    }
+}
+
+@keyframes lds-circle {
+
+    0%,
     100% {
-      transform: rotateY(3600deg);
+        animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
     }
-  }
+
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(1800deg);
+        animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1);
+    }
+
+    100% {
+        transform: rotateY(3600deg);
+    }
+}

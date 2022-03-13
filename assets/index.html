@@ -53,20 +53,22 @@
             <div class="section hide">
                 <ul>
                     <li class="name"><label>Priority:</label></li>
-                    <li class="value"><input list="prioList" id="prio" class="input-data-list" autocomplete="off">
-                        <datalist id="prioList" class="datalist">
-                            <option value="Heads"></option>
-                            <option value="Tails"></option>
-                        </datalist>
+                    <li class="value">
+                        <select id="prio">
+                            <option value=""></option>
+                            <option value="Heads">Heads</option>
+                            <option value="Tails">Tails</option>
+                        </select>
                     </li>
                 </ul>
                 <ul>
                     <li class="name"><label>Even spread:</label></li>
-                    <li class="value"><input list="evenList" id="even" class="input-data-list" autocomplete="off">
-                        <datalist id="evenList" class="datalist">
-                            <option value="True"></option>
-                            <option value="False"></option>
-                        </datalist>
+                    <li class="value">
+                        <select id="even" class="datalist">
+                            <option value=""></option>
+                            <option value="True">True</option>
+                            <option value="False">False</option>
+                        </select>
                     </li>
                 </ul>
             </div>
