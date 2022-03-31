@@ -25,8 +25,7 @@ router.get('/coin', (req, res, next) =>{
     if(req.query.side){
         if (req.query.side === 'heads' || req.query.side === 'head' || req.query.side === 'h' || req.query.side === '0') params.priority = side.heads;
         else if (req.query.side === 'tails' || req.query.side === 'tail' || req.query.side === 't' || req.query.side === '1') params.priority = side.tails;
-        else if (req.query.side === 'none')
-        else return res.status(400).send('Invalid value for side query. Use heads or tails');
+        else if (req.query.side !== 'none') return res.status(400).send('Invalid value for side query. Use heads or tails');
     }
     
     if (testQuery(req.query.krarkAmount)) params.amountOfThumbs = Number(req.query.krarkAmount);
