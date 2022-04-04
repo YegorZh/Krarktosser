@@ -83,16 +83,3 @@ export class CoinTosser {
         return new Promise((res, rej) => recursiveLoop(tossAmount, res));
     }
 }
-
-const params = {
-    priority: side.heads,
-    amountOfThumbs: 10,
-    minPriority: 0,
-    maxPriority: 0,
-    minSecondary: 0,
-    maxSecondary: 0,
-    isSpreadEven: false,
-    flipUntilLose: side.heads
-};
-
-(async function () { console.log(await CoinTosser.tossSequence(1000000, params)) })();
