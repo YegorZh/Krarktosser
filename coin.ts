@@ -1,5 +1,6 @@
 export interface ThumbParameters {
     priority?: side;
+    flipUntilLose?: side;
     amountOfThumbs?: number;
     minPriority?: number;
     maxPriority?: number;
@@ -16,12 +17,13 @@ export class CoinTosser {
     static toss() {
         return Math.floor(Math.random() * 2);
     }
+    static inverseSide = (inputSide: side | undefined) => inputSide === side.heads ? side.tails : side.heads;
 
     static checkPriority(output: number[], secondary: side, parameters: ThumbParameters) {
         let out: side | undefined;
-        
-        if(parameters.isSpreadEven && output[side.heads] > output[side.tails]) out = side.tails;
-        else if(parameters.isSpreadEven && output[side.heads] < output[side.tails]) out = side.heads;
+
+        if (parameters.isSpreadEven && output[side.heads] > output[side.tails]) out = side.tails;
+        else if (parameters.isSpreadEven && output[side.heads] < output[side.tails]) out = side.heads;
 
         if (typeof parameters.priority !== 'undefined') {
             let maxSecCheck = Boolean(parameters.maxSecondary && output[secondary] >= parameters.maxSecondary);
@@ -29,15 +31,15 @@ export class CoinTosser {
             let minSecCheck = Boolean(parameters.minSecondary && output[secondary] < parameters.minSecondary);
             let minPrioCheck = Boolean(parameters.minPriority && output[parameters.priority] < parameters.minPriority);
 
-            if(minSecCheck && !(parameters.maxSecondary || maxSecCheck)) out = secondary;
-            if(minPrioCheck && !(parameters.maxPriority || maxPrioCheck)) out = parameters.priority;
-            
-            if(!(maxSecCheck && maxPrioCheck)){
-                if(maxPrioCheck) out = secondary;
-                if(maxSecCheck) out = parameters.priority;
+            if (minSecCheck && !(parameters.maxSecondary || maxSecCheck)) out = secondary;
+            if (minPrioCheck && !(parameters.maxPriority || maxPrioCheck)) out = parameters.priority;
+
+            if (!(maxSecCheck && maxPrioCheck)) {
+                if (maxPrioCheck) out = secondary;
+                if (maxSecCheck) out = parameters.priority;
             }
 
-            if(typeof out === 'undefined') out = parameters.priority;   
+            if (typeof out === 'undefined') out = parameters.priority;
         }
         return out;
     }
@@ -49,14 +51,19 @@ export class CoinTosser {
         if (parameters.amountOfThumbs) iterations = Math.pow(2, parameters.amountOfThumbs);
 
         let currentPriority = parameters.priority;
-        let secondary: side;
-        parameters.priority === side.heads ? secondary = side.tails : secondary = side.heads;
+        let secondary = CoinTosser.inverseSide(parameters.priority);
 
-        function recursiveLoop(targetI: number, res: Function, i: number = 0){
-            if(i >= targetI) {
+        let checkFlipUntilLose = () => false;
+        if (
+            parameters.flipUntilLose === side.heads ||
+            parameters.flipUntilLose === side.tails
+        ) checkFlipUntilLose = () => output[CoinTosser.inverseSide(parameters.flipUntilLose as side)] > 0;
+
+        function recursiveLoop(targetI: number, res: Function, i: number = 0) {
+            if (i >= targetI || checkFlipUntilLose()) {
                 let [heads, tails] = output;
-                const totalFlips = tossAmount * iterations;
-                return res({heads, tails, totalFlips});
+                const totalFlips = (heads + tails) * iterations;
+                return res({ heads, tails, totalFlips });
             }
             currentPriority = CoinTosser.checkPriority(output, secondary, parameters);
             for (let j = 0; j < iterations; j++) {
@@ -76,3 +83,16 @@ export class CoinTosser {
         return new Promise((res, rej) => recursiveLoop(tossAmount, res));
     }
 }
+
+const params = {
+    priority: side.heads,
+    amountOfThumbs: 10,
+    minPriority: 0,
+    maxPriority: 0,
+    minSecondary: 0,
+    maxSecondary: 0,
+    isSpreadEven: false,
+    flipUntilLose: side.heads
+};
+
+(async function () { console.log(await CoinTosser.tossSequence(1000000, params)) })();
