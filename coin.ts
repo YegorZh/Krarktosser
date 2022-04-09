@@ -32,8 +32,8 @@ export class CoinTosser {
             let minSecCheck = Boolean(parameters.minSecondary && output[secondary] < parameters.minSecondary);
             let minPrioCheck = Boolean(parameters.minPriority && output[parameters.priority] < parameters.minPriority);
 
-            if (minSecCheck && !(parameters.maxSecondary || maxSecCheck)) out = secondary;
-            if (minPrioCheck && !(parameters.maxPriority || maxPrioCheck)) out = parameters.priority;
+            if (minSecCheck && !(maxSecCheck)) out = secondary;
+            if (minPrioCheck && !(maxPrioCheck)) out = parameters.priority;
 
             if (!(maxSecCheck && maxPrioCheck)) {
                 if (maxPrioCheck) out = secondary;
