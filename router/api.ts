@@ -38,7 +38,7 @@ router.get('/coin', (req, res, next) => {
     if (req.query.flipUntilLose) {
         if(verifyOr(req.query.flipUntilLose as string, ['heads', 'head', 'h', '0'])) params.flipUntilLose = side.heads;
         else if (verifyOr(req.query.flipUntilLose as string,['tails', 'tail', 't', '1'])) params.flipUntilLose = side.tails;
-        else if (req.query.side !== 'off' && req.query.side !== 'false') return res.status(400).send('Invalid value for flipUntilLose query. Use heads, tails or off.');
+        else if (req.query.flipUntilLose !== 'off' && req.query.flipUntilLose !== 'false') return res.status(400).send('Invalid value for flipUntilLose query. Use heads, tails or off.');
     }
 
     if (testQuery(req.query.krarkAmount)) params.amountOfThumbs = Number(req.query.krarkAmount);
