@@ -1,6 +1,7 @@
 export interface ThumbParameters {
     priority?: side;
     flipUntilLose?: side;
+    coinsPerFlip?: number;
     amountOfThumbs?: number;
     minPriority?: number;
     maxPriority?: number;
@@ -49,6 +50,7 @@ export class CoinTosser {
 
         let iterations = 1;
         if (parameters.amountOfThumbs) iterations = Math.pow(2, parameters.amountOfThumbs);
+        else if (parameters.coinsPerFlip) iterations = parameters.coinsPerFlip;
 
         let currentPriority = parameters.priority;
         let secondary = CoinTosser.inverseSide(parameters.priority);

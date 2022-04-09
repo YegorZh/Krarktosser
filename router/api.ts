@@ -42,6 +42,7 @@ router.get('/coin', (req, res, next) => {
     }
 
     if (testQuery(req.query.krarkAmount)) params.amountOfThumbs = Number(req.query.krarkAmount);
+    if (testQuery(req.query.coinsPerFlip)) params.coinsPerFlip = Number(req.query.coinsPerFlip);
     if (testQuery(req.query.minPrio)) params.minPriority = Number(req.query.minPrio);
     if (testQuery(req.query.maxPrio)) params.maxPriority = Number(req.query.maxPrio);
     if (testQuery(req.query.minSecond)) params.minSecondary = Number(req.query.minSecond);
